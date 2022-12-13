@@ -27,6 +27,13 @@ public class RoomController : ControllerBase
 		return room;
 	}
 
+	[HttpGet("all")]
+	public Task<IEnumerable<Room>> GetAllRooms()
+	{
+		var rooms = _dbContext.Rooms.AsNoTracking().ToList();
+		return Task.FromResult<IEnumerable<Room>>(rooms);
+	}
+
 	[HttpPost]
 	public async Task<Room> AddRoom([FromQuery] string name)
 	{
